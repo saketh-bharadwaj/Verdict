@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: ./backend
+    command: npm run start
+    working_dir: /app
+    ports:
+      - '4000:4000'
+    env_file:
+      - ./backend/.env.example
+    depends_on:
+      - redis
+      - postgres
+
+  worker:
+    build:
+      context: ./backend
+    command: npm run worker
+    working_dir: /app
+    env_file:
+      - ./backend/.env.example
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: verdict
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

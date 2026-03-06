@@ -1,0 +1,28 @@
+{
+  "name": "verdict-backend",
+  "version": "0.1.0",
+  "description": "Backend skeleton for the Verdict distributed online judge platform.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "worker": "node src/workers/submission.worker.js"
+  },
+  "keywords": [
+    "online-judge",
+    "distributed-systems",
+    "bullmq",
+    "express"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bullmq": "^5.58.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
